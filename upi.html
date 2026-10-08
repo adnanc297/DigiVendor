@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="DigiVendor UPI and QR payment generator for small vendors."
+    >
+
+    <title>DigiVendor | UPI & QR</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- QR CODE LIBRARY -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+
+</head>
+
+<body>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="index.html" class="logo">
+                Digi<span>Vendor</span>
+            </a>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                type="button"
+                aria-label="Open navigation menu"
+            >
+                ☰
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="upi.html" class="active">
+                    UPI & QR
+                </a>
+
+                <a href="apps.html">
+                    Apps
+                </a>
+
+                <a href="guide.html">
+                    Guide
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="page-header">
+
+        <span class="eyebrow">
+            DIGITAL PAYMENTS
+        </span>
+
+        <h1>
+            UPI & QR Payments
+        </h1>
+
+        <p>
+            Create a simple payment QR code for your business.
+        </p>
+
+    </section>
+
+
+    <!-- ================= UPI INTRO ================= -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Accept Digital Payments Easily
+                </h2>
+
+                <p>
+                    UPI allows customers to pay directly from
+                    their bank account using a mobile phone.
+                    A QR code makes the process even easier.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        💳
+                    </div>
+
+                    <h3>
+                        Fast Payments
+                    </h3>
+
+                    <p>
+                        Customers can make digital payments
+                        within seconds using their UPI app.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Secure
+                    </h3>
+
+                    <p>
+                        UPI payments are processed through
+                        secure banking systems.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        No Cash Needed
+                    </h3>
+
+                    <p>
+                        Customers can pay using their
+                        smartphone without carrying cash.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QR GENERATOR ================= -->
+
+    <section class="section section-alt">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    QR GENERATOR
+                </span>
+
+                <h2>
+                    Create Your Payment QR
+                </h2>
+
+                <p>
+                    Enter your business details below to
+                    generate a demonstration UPI QR code.
+                </p>
+
+            </div>
+
+
+            <div class="qr-generator">
+
+                <div class="qr-generator-heading">
+
+                    <h3>
+                        Business Details
+                    </h3>
+
+                    <p>
+                        Fill in the details to generate your QR code.
+                    </p>
+
+                </div>
+
+
+                <form id="qrForm">
+
+                    <div class="form-group">
+
+                        <label for="vendorName">
+                            Vendor / Business Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="vendorName"
+                            placeholder="Example: Adnan Tea Stall"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="upiId">
+                            UPI ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="upiId"
+                            placeholder="Example: yourname@upi"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="amount">
+                            Amount
+                            <span>
+                                Optional
+                            </span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            placeholder="Example: 100"
+                            min="1"
+                            step="0.01"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="generateQR"
+                    >
+                        Generate QR Code
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QR RESULT ================= -->
+
+    <section
+        class="section"
+        id="qrResult"
+        style="display: none;"
+    >
+
+        <div class="container">
+
+            <div class="qr-result">
+
+                <span class="eyebrow">
+                    YOUR PAYMENT QR
+                </span>
+
+                <h2 id="qrVendor">
+                    Vendor Name
+                </h2>
+
+                <p id="qrUpi">
+                    UPI ID
+                </p>
+
+                <p id="qrAmount">
+                    Amount: Entered by customer
+                </p>
+
+
+                <div
+                    id="qrcode"
+                    style="margin: 20px auto; width: 220px; min-height: 220px;"
+                ></div>
+
+
+                <p>
+                    Scan this QR code using a UPI payment app.
+                </p>
+
+
+                <button
+                    type="button"
+                    id="downloadQR"
+                    class="btn btn-secondary"
+                >
+                    Download QR Code
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= UPI STEPS ================= -->
+
+    <section class="section section-alt">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    FOR SMALL VENDORS
+                </span>
+
+                <h2>
+                    Start Accepting UPI in 4 Steps
+                </h2>
+
+                <p>
+                    Follow these simple steps to start using
+                    digital payments at your business.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+                <div class="feature-card">
+
+                    <div class="card-icon">
+                        🏦
+                    </div>
+
+                    <h3>
+                        1. Have a Bank Account
+                    </h3>
+
+                    <p>
+                        Use an eligible bank account that
+                        supports UPI payments.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="card-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        2. Choose a UPI App
+                    </h3>
+
+                    <p>
+                        Use a trusted UPI application such as
+                        Google Pay, PhonePe or BHIM.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="card-icon">
+                        ▦
+                    </div>
+
+                    <h3>
+                        3. Create Your QR
+                    </h3>
+
+                    <p>
+                        Generate a QR code connected to
+                        your UPI ID.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="card-icon">
+                        💰
+                    </div>
+
+                    <h3>
+                        4. Receive Payments
+                    </h3>
+
+                    <p>
+                        Customers scan the QR code and
+                        complete the payment.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SAFETY ================= -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    STAY SAFE
+                </span>
+
+                <h2>
+                    Important UPI Safety Tips
+                </h2>
+
+                <p>
+                    Keep these basic rules in mind while
+                    accepting digital payments.
+                </p>
+
+            </div>
+
+
+            <div class="cards-grid">
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        Never Share Your PIN
+                    </h3>
+
+                    <p>
+                        Your UPI PIN should remain private.
+                        Never share it with another person.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        ✅
+                    </div>
+
+                    <h3>
+                        Check Payment Status
+                    </h3>
+
+                    <p>
+                        Confirm that the payment was actually
+                        received before providing goods.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        📸
+                    </div>
+
+                    <h3>
+                        Don't Trust Screenshots
+                    </h3>
+
+                    <p>
+                        Verify the payment in your bank or
+                        UPI application.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="card-icon">
+                        ⚠️
+                    </div>
+
+                    <h3>
+                        Avoid Unknown Links
+                    </h3>
+
+                    <p>
+                        Do not open suspicious payment links
+                        sent by strangers.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div>
+
+                    <h3>
+                        DigiVendor
+                    </h3>
+
+                    <p>
+                        Helping Small Vendors Go Digital.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+                        TY-IT Community Engagement Project
+                    </p>
+
+                    <p>
+                        Built using HTML, CSS & JavaScript
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 DigiVendor. Academic Project.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
